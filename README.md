@@ -4,7 +4,8 @@
 - [x] `POST` `http://localhost:4200/api/tags`: create new tag
 ```json
 {
-    "name": "Javascript"
+    "name": "Javascript",
+    "color": "red" // optional
 }
 ```
 
