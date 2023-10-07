@@ -1,7 +1,7 @@
 ### API
 #### Tags:
-- [x] `GET` `http://localhost:4200/api/books`: get all tags
-- [x] `POST` `http://localhost:4200/api/books`: create new tag
+- [x] `GET` `http://localhost:4200/api/tags`: get all tags
+- [x] `POST` `http://localhost:4200/api/tags`: create new tag
 ```json
 {
     "name": "Javascript"
