@@ -32,3 +32,11 @@ model Book {
   tags            Tag[]
   author          String
 }
+
+model Author {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+}
