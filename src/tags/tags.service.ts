@@ -66,4 +66,19 @@ export class TagsService {
       where: { id },
     });
   }
+
+  async getBooks(id: string) {
+    const tag = await this.prisma.tag.findUnique({
+      where: { id },
+      include: {
+        books: true,
+      },
+    });
+
+    if (!tag) {
+      throw new HttpException('Tag not found', HttpStatus.NOT_FOUND);
+    }
+
+    return tag.books;
+  }
 }

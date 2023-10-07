@@ -39,4 +39,9 @@ export class TagsController {
   remove(@Param('id') id: string) {
     return this.tagsService.remove(id);
   }
+
+  @Get(':id/books')
+  getBooks(@Param('id') id: string) {
+    return this.tagsService.getBooks(id);
+  }
 }
