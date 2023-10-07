@@ -8,7 +8,15 @@
     "color": "red" // optional
 }
 ```
-
+- [x] `PATCH` `http://localhost:4200/api/tags/:id`: update tag
+```json
+{
+    "name": "Javascript",
+    "color": "red" // optional
+}
+```
+- [x] `DELETE` `http://localhost:4200/api/tags/:id`: delete tag
+- [x] `GET` `http://localhost:4200/api/tags/:id/books`: get all books of tag
 #### Books
 - [x] `GET` `http://localhost:4200/api/books`: get all books
 - [x] `GET` `http://localhost:4200/api/books/:id`: get book by id
