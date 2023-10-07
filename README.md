@@ -7,11 +7,7 @@
     "name": "Javascript"
 }
 ```
-```json
-{
-    "name": "Javascript"
-}
-```
+
 #### Books
 - [x] `GET` `http://localhost:4200/api/books`: get all books
 - [x] `GET` `http://localhost:4200/api/books/:id`: get book by id
