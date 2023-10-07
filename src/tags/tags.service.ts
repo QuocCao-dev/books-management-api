@@ -1,31 +1,69 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TagsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createTagDto: CreateTagDto) {
+  async create(createTagDto: CreateTagDto) {
+    const { name, color } = createTagDto;
+
+    const existingTag = this.prisma.tag.findFirst({
+      where: { name },
+    });
+
+    if (existingTag) {
+      throw new HttpException('Tag already exists', HttpStatus.BAD_REQUEST);
+    }
+
     return this.prisma.tag.create({
-      data: createTagDto,
+      data: { name, color },
     });
   }
 
-  findAll() {
-    return this.prisma.tag.findMany();
+  async findAll() {
+    return this.prisma.tag.findMany({
+      select: { id: true, name: true, color: true },
+      orderBy: { name: 'asc' },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  findOne(id: string) {
+    return this.prisma.tag.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, updateTagDto: UpdateTagDto) {
-    return `This action updates a #${id} tag`;
+  async update(id: string, updateTagDto: UpdateTagDto) {
+    const { name, color } = updateTagDto;
+
+    const existingTag = await this.prisma.tag.findUnique({
+      where: { id },
+    });
+
+    if (!existingTag) {
+      throw new HttpException('Tag not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.prisma.tag.update({
+      where: { id },
+      data: { name, color },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  async remove(id: string) {
+    const existingTag = await this.prisma.tag.findUnique({
+      where: { id },
+    });
+
+    if (!existingTag) {
+      throw new HttpException('Tag not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.prisma.tag.delete({
+      where: { id },
+    });
   }
 }

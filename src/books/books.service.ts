@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class BooksService {
@@ -12,7 +12,7 @@ export class BooksService {
 
     let existingTags = [];
 
-    if (tags.length > 0) {
+    if (tags?.length > 0) {
       existingTags = await this.prisma.tag.findMany({
         where: {
           id: {
@@ -47,7 +47,7 @@ export class BooksService {
 
     return books.map((book) => ({
       ...book,
-      tags: book.tags.map((tag) => tag.name),
+      tags: book.tags.map(({ name, color, id }) => ({ name, color, id })),
     }));
   }
 

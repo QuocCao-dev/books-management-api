@@ -16,6 +16,7 @@ model Tag {
   updatedAt DateTime @updatedAt
 
   name  String
+  color String? @default("blue")
   books Book[]
 }
 
