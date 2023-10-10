@@ -10,7 +10,7 @@ export class TagsService {
   async create(createTagDto: CreateTagDto) {
     const { name, color } = createTagDto;
 
-    const existingTag = this.prisma.tag.findFirst({
+    const existingTag = await this.prisma.tag.findFirst({
       where: { name },
     });
 
