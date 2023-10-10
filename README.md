@@ -20,7 +20,7 @@
 #### Books
 - [x] `GET` `http://localhost:4200/api/books`: get all books
 - [x] `GET` `http://localhost:4200/api/books/:id`: get book by id
-- [x] `POST` `http://localhost:4200/api/books/:id`: create new book
+- [x] `POST` `http://localhost:4200/api/books`: create new book
 ```json
 {
     "name": "Learn Reactjs in 30 days",
@@ -28,7 +28,7 @@
     "price": 1200,
     "publicationDate": "2023",
     "author": "Cao Anh Quoc",
-    "tags": ["8a70c12d-3e26-4949-af1b-a2cd66a36455"] // optional
+    "tags": ["8a70c12d-3e26-4949-af1b-a2cd66a36455"] // optional, id[] of tag
 }
 ``` 
 - [x] `PATCH` `http://localhost:4200/api/books/:id`: update book
